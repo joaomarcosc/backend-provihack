@@ -119,4 +119,9 @@ export class EstablishmentBusiness {
   }
  }
 
+ async getDiscards(){
+  let res = await this.establishmentDataBase.getDiscard()
+
+  return res
+ }
 }
