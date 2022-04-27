@@ -35,12 +35,14 @@ export interface EstablishmentInputDataBase {
  state:string,
  city:string,
  cep:string,
- adress:string
+ adress:string,
  tel:string,
  workingTime:string,
  howToDiscard:string,
  howDoesDiscart:string
 }
+
+
 
 
 export interface DiscardInputDTO {
