@@ -113,6 +113,26 @@ export class EstablishmentDataBase extends BaseDatabase {
   }
  }
 
+ public async getDiscard(): Promise<DiscardInputDTO[]> {
+  try {
+   const result = await BaseDatabase.connection
+    .select("*")
+    .from(EstablishmentDataBase.TABLE_DISCARD)
+
+   let res: DiscardInputDTO[] = result.map((disc: any) => {
+    return {
+     id: disc.id,
+     name: disc.name
+    }
+   })
+
+   return res
+
+  } catch (error) {
+   throw new CustomError(500, "An unexpected error ocurred in get Establishment")
+  }
+ }
+
  public async getDiscardById(
   id: string
  ): Promise<DiscardInputDTO | undefined> {
