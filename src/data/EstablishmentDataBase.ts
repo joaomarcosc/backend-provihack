@@ -1,5 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase";
-import { EstablishmentInputDataBase, Establishment, EstablishmentInputDTO, DiscardInputDTO, EstabDiscarDTO } from "../business/entities/establishment";
+import { EstablishmentInputDataBase, DiscardInputDTO, EstabDiscarDTO } from "../business/entities/establishment";
 import { CustomError } from "../business/error/CustomError"
 
 export class EstablishmentDataBase extends BaseDatabase {
@@ -113,6 +113,26 @@ export class EstablishmentDataBase extends BaseDatabase {
   }
  }
 
+ public async getDiscard(): Promise<DiscardInputDTO[]> {
+  try {
+   const result = await BaseDatabase.connection
+    .select("*")
+    .from(EstablishmentDataBase.TABLE_DISCARD)
+
+   let res: DiscardInputDTO[] = result.map((disc: any) => {
+    return {
+     id: disc.id,
+     name: disc.name
+    }
+   })
+
+   return res
+
+  } catch (error) {
+   throw new CustomError(500, "An unexpected error ocurred in get Establishment")
+  }
+ }
+
  public async getDiscardById(
   id: string
  ): Promise<DiscardInputDTO | undefined> {
@@ -121,6 +141,29 @@ export class EstablishmentDataBase extends BaseDatabase {
     .select("*")
     .from(EstablishmentDataBase.TABLE_DISCARD)
     .where({ id: id })
+
+   let res: DiscardInputDTO[] = result.map((disc: any) => {
+    return {
+     id: disc.id,
+     name: disc.name
+    }
+   })
+
+   return res[0]
+
+  } catch (error) {
+   throw new CustomError(500, "An unexpected error ocurred in get Establishment")
+  }
+ }
+
+ public async getDiscardByName(
+  name: string
+ ): Promise<DiscardInputDTO | undefined> {
+  try {
+   const result = await BaseDatabase.connection
+    .select("*")
+    .from(EstablishmentDataBase.TABLE_DISCARD)
+    .where({ name: name })
 
    let res: DiscardInputDTO[] = result.map((disc: any) => {
     return {
