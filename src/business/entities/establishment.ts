@@ -8,8 +8,8 @@ export class Establishment {
   public readonly adress:string,
   public readonly tel:string,
   public readonly workingTime:string,
-  public readonly discard:string[],
-  public readonly howToDiscard:string,
+  public readonly discart:string[],
+  public readonly howToDiscart:string,
   public readonly howDoesDiscart:string
 
  ) {}
@@ -21,11 +21,11 @@ export interface EstablishmentInputDTO {
  state:string,
  city:string,
  cep:string,
- adress:string
+ adress:string,
  tel:string,
  workingTime:string,
- discard:string[],
- howToDiscard:string,
+ discart:string[],
+ howToDiscart:string,
  howDoesDiscart:string
 }
 
@@ -38,14 +38,14 @@ export interface EstablishmentInputDataBase {
  adress:string,
  tel:string,
  workingTime:string,
- howToDiscard:string,
+ howToDiscart:string,
  howDoesDiscart:string
 }
 
 
 
 
-export interface DiscardInputDTO {
+export interface DiscartInputDTO {
  id:string,
  name:string
 }
@@ -53,5 +53,5 @@ export interface DiscardInputDTO {
 export interface EstabDiscarDTO {
  id:string,
  id_establishment:string,
- id_discard:string
+ id_discart:string
 }
