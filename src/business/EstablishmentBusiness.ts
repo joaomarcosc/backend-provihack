@@ -1,6 +1,6 @@
 import { EstablishmentDataBase } from "../data/EstablishmentDataBase";
 import { IdGenerator } from "./services/IdGenerator";
-import { Establishment, EstablishmentInputDTO, EstablishmentInputDataBase, DiscardInputDTO, EstabDiscarDTO } from "./entities/establishment";
+import { Establishment, EstablishmentInputDTO, EstablishmentInputDataBase, DiscartInputDTO, EstabDiscarDTO } from "./entities/establishment";
 
 export class EstablishmentBusiness {
  constructor(
@@ -20,38 +20,38 @@ export class EstablishmentBusiness {
    adress: establishment.adress,
    tel: establishment.tel,
    workingTime: establishment.workingTime,
-   howToDiscard: establishment.howToDiscard,
+   howToDiscart: establishment.howToDiscart,
    howDoesDiscart: establishment.howDoesDiscart
   }
 
   await this.establishmentDataBase.createEstablishment(establishmentDataBase)
 
-  for (let i = 0; i < establishment.discard.length; i++) {
-   let res = await this.establishmentDataBase.getDiscardByName(establishment.discard[i])
+  for (let i = 0; i < establishment.discart.length; i++) {
+   let res = await this.establishmentDataBase.getDiscartByName(establishment.discart[i])
    let id_estabDiscar = this.idGenerator.generate()
    if (!res) {
 
-    let id_Discard = this.idGenerator.generate()
+    let id_Discart = this.idGenerator.generate()
 
-    let discard: DiscardInputDTO = {
-     id: id_Discard,
-     name: establishment.discard[i]
+    let discart: DiscartInputDTO = {
+     id: id_Discart,
+     name: establishment.discart[i]
     }
 
     let estabDisca: EstabDiscarDTO = {
      id: id_estabDiscar,
      id_establishment: id_establishment,
-     id_discard: id_Discard
+     id_discart: id_Discart
     }
 
-    await this.establishmentDataBase.createDiscard(discard)
+    await this.establishmentDataBase.createDiscart(discart)
     await this.establishmentDataBase.createEstabDiscar(estabDisca)
    } else {
 
     let estabDisca: EstabDiscarDTO = {
      id: id_estabDiscar,
      id_establishment: id_establishment,
-     id_discard: res.id
+     id_discart: res.id
     }
 
     await this.establishmentDataBase.createEstabDiscar(estabDisca)
@@ -61,7 +61,7 @@ export class EstablishmentBusiness {
 
  async getEstablishmentById(id: string): Promise<Establishment | undefined> {
   let establishment = await this.establishmentDataBase.getEstablishementById(id)
-  let discard: string[] = []
+  let discart: string[] = []
   if (!establishment) {
    return undefined
   }
@@ -71,9 +71,9 @@ export class EstablishmentBusiness {
 
    if (estabDiscard) {
     for (let i = 0; i < estabDiscard.length; i++) {
-     let disc = await this.establishmentDataBase.getDiscardById(estabDiscard[i].id_discard)
+     let disc = await this.establishmentDataBase.getDiscartById(estabDiscard[i].id_discart)
      if (disc) {
-      discard.push(disc.name)
+      discart.push(disc.name)
      }
     }
    }
@@ -87,8 +87,8 @@ export class EstablishmentBusiness {
     establishment.adress,
     establishment.tel,
     establishment.workingTime,
-    discard,
-    establishment.howToDiscard,
+    discart,
+    establishment.howToDiscart,
     establishment.howDoesDiscart
    )
 
@@ -96,16 +96,16 @@ export class EstablishmentBusiness {
   }
  }
 
- async getEstablishmentByDiscard(nameDiscard: string): Promise<Establishment[] | undefined> {
-  let discard = await this.establishmentDataBase.getDiscardByName(nameDiscard)
+ async getEstablishmentByDiscart(id: string): Promise<Establishment[] | undefined> {
+  let discart = await this.establishmentDataBase.getDiscartById(id)
   let establishments: Establishment[] = []
 
-  if (!discard) {
+  if (!discart) {
    return undefined
   }
 
-  if (discard) {
-   const estabDiscard = await this.establishmentDataBase.getEstabDiscaByIdEstablishment(discard.id)
+  if (discart) {
+   const estabDiscard = await this.establishmentDataBase.getEstabDiscaByIdDiscart(discart.id)
 
    if (estabDiscard) {
     for (let i = 0; i < estabDiscard.length; i++) {
@@ -119,8 +119,8 @@ export class EstablishmentBusiness {
   }
  }
 
- async getDiscards(){
-  let res = await this.establishmentDataBase.getDiscard()
+ async getDiscarts() {
+  let res = await this.establishmentDataBase.getDiscart()
 
   return res
  }
