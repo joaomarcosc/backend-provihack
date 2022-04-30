@@ -1,10 +1,12 @@
 import express from "express";
 import { AddressInfo } from "net";
 import { discartRouter, establishmentRouter } from "./controller/routes/establishmentRouter";
+import cors from 'cors';
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/establishment", establishmentRouter);
 app.use("/discart", discartRouter);
