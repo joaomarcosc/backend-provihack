@@ -9,6 +9,10 @@
    },
    "author": "Labenu_",
    "license": "ISC",
+   "engines": {
+    "node": "14.17.5",
+    "npm":"6.14.14"
+   },
    "dependencies": {
       "bcryptjs": "^2.4.3",
       "dotenv": "^8.2.0",
