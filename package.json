@@ -3,7 +3,8 @@
    "version": "1.0.0",
    "main": "index.js",
    "scripts": {
-      "start": "tsc && node ./build/src/index.js",
+    "postinstall":"tsc",
+      "start": "node ./build/src/index.js",
       "dev-start": "ts-node-dev --transpile-only --ignore-watch node_modules ./src/index.ts",
       "test": "jest"
    },
