@@ -4,6 +4,7 @@ import { AddressInfo } from "net";
 import { discartRouter, establishmentRouter } from "./controller/routes/establishmentRouter";
 import { formRouter } from "./controller/routes/FormRouter";
 
+
 const PORT = process.env.PORT
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/establishment", establishmentRouter);
 app.use(formRouter)
+
 
 const server = app.listen(PORT, () => {
  if (server) {
