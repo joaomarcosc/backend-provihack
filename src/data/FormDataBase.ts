@@ -1,5 +1,5 @@
 import { CustomError } from '../business/error/CustomError';
-import { FormSugestionInputDTO, FormSuportInputDTO } from './../business/entities/forms';
+import { FormSugestion, FormSuport } from './../business/entities/forms';
 import { BaseDatabase } from './BaseDatabase';
 
 export class FormDataBase extends BaseDatabase {
@@ -7,10 +7,11 @@ export class FormDataBase extends BaseDatabase {
  private static TABLE_SUGESTION = "sugestion";
  private static TABLE_SUPORT = "suport";
 
- public async createFormSugestion(form: FormSugestionInputDTO) {
+ public async createFormSugestion(form: FormSugestion) {
   try {
    await BaseDatabase.connection
     .insert({
+     id:form.id,
      nameEstablishment: form.nameEstablishment,
      tel: form.tel,
      state: form.state,
@@ -25,7 +26,7 @@ export class FormDataBase extends BaseDatabase {
   }
  }
 
- public async createFormSuport(form: FormSuportInputDTO) {
+ public async createFormSuport(form: FormSuport) {
   try {
    await BaseDatabase.connection
     .insert({

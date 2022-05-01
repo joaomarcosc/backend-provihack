@@ -27,7 +27,7 @@ export class EstablishmentDataBase extends BaseDatabase {
     })
     .into(EstablishmentDataBase.TABLE_ESTABLISHMENT)
   } catch (error) {
-   throw new CustomError(500, "An unexpected error ocurred in create Establishment")
+   throw new CustomError(500, "An unexpected error ocurred in create Establishment3")
   }
  }
 

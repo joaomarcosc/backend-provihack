@@ -17,7 +17,7 @@ export class FormSuport {
   public readonly name: string,
   public readonly subject: string,
   public readonly email: string,
-  public readonly message: string,
+  public readonly message: string
  ) { }
 }
 
@@ -32,7 +32,6 @@ export interface FormSugestionInputDTO {
 }
 
 export interface FormSuportInputDTO {
- id: string,
  name: string,
  subject: string,
  email: string,

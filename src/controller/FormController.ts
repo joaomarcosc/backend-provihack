@@ -43,7 +43,6 @@ export class FormController {
   try {
 
    const form:FormSuportInputDTO = {
-    id: req.body.id,
     name: req.body.name,
     subject: req.body.subject,
     email: req.body.email,

@@ -1,4 +1,4 @@
-import { FormSugestionInputDTO, FormSuportInputDTO } from './entities/forms';
+import { FormSugestion, FormSugestionInputDTO, FormSuport, FormSuportInputDTO } from './entities/forms';
 import { FormDataBase } from "../data/FormDataBase";
 import { IdGenerator } from "./services/IdGenerator";
 
@@ -8,14 +8,32 @@ export class FormBusiness {
   private formDataBase: FormDataBase
  ) { }
 
- async createFormSugestion(form:FormSugestionInputDTO) {
+ async createFormSugestion(form: FormSugestionInputDTO) {
   const id = this.idGenerator.generate();
-  await this.formDataBase.createFormSugestion(form)
+  let newForm = new FormSugestion(
+   id,
+   form.nameEstablishment,
+   form.tel,
+   form.state,
+   form.city,
+   form.cep,
+   form.nameResponsive,
+   form.email
+  )
+  await this.formDataBase.createFormSugestion(newForm)
  }
 
- async createFormSuporrt(form:FormSuportInputDTO) {
+ async createFormSuporrt(form: FormSuportInputDTO) {
   const id = this.idGenerator.generate();
-  await this.formDataBase.createFormSuport(form)
+  let newForm = new FormSuport(
+  id,
+  form.name,
+  form.subject,
+  form.email,
+  form.message
+  )
+  
+  await this.formDataBase.createFormSuport(newForm)
  }
- 
+
 }

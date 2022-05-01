@@ -43,7 +43,13 @@ export interface EstablishmentInputDataBase {
 }
 
 
-
+export interface EstablishmentCard {
+ id: string,
+ name: string,
+ state: string,
+ city: string,
+ cep: string
+}
 
 export interface DiscartInputDTO {
  id: string,
