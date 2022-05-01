@@ -67,33 +67,12 @@ export class EstablishmentController {
 
  async getEstablishmentByDiscart(req: Request, res: Response) {
   try {
-   let id = req.query.id as string
+   let name = req.query.name as string
 
-   if (!id) {
-    throw new CustomError(404, "Faltou o id")
-   }
-
-   let response = await establishmentBusiness.getEstablishmentByDiscart(id)
+   let response = await establishmentBusiness.getEstablishmentByDiscart(name)
 
    if (!response) {
     throw new CustomError(402, "Estabelecimentos não encontrados")
-   }
-
-   res.status(200).send({ data: response })
-
-  } catch (error) {
-   res
-    .status(error.statusCode || 400)
-    .send({ error: error.message });
-  }
- }
-
- async getDiscarts(req: Request, res: Response) {
-  try {
-   let response = await establishmentBusiness.getDiscarts()
-
-   if (!response) {
-    throw new CustomError(402, "Descartes não encontrados")
    }
 
    res.status(200).send({ data: response })

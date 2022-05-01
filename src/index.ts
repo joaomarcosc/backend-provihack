@@ -2,6 +2,8 @@ import cors from "cors";
 import express from "express";
 import { AddressInfo } from "net";
 import { discartRouter, establishmentRouter } from "./controller/routes/establishmentRouter";
+import { formRouter } from "./controller/routes/FormRouter";
+
 
 const PORT = process.env.PORT
 
@@ -12,7 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/establishment", establishmentRouter);
-app.use("/discart", discartRouter);
+app.use(formRouter)
+
 
 const server = app.listen(PORT, () => {
  if (server) {
@@ -22,3 +25,4 @@ const server = app.listen(PORT, () => {
   console.error(`Falha ao rodar o servidor.`);
  }
 });  
+

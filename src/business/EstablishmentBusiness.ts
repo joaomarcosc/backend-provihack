@@ -1,6 +1,6 @@
 import { EstablishmentDataBase } from "../data/EstablishmentDataBase";
 import { IdGenerator } from "./services/IdGenerator";
-import { Establishment, EstablishmentInputDTO, EstablishmentInputDataBase, DiscartInputDTO, EstabDiscarDTO } from "./entities/establishment";
+import { Establishment, EstablishmentInputDTO, EstablishmentInputDataBase, DiscartInputDTO, EstabDiscarDTO, EstablishmentCard } from "./entities/establishment";
 
 export class EstablishmentBusiness {
  constructor(
@@ -96,9 +96,9 @@ export class EstablishmentBusiness {
   }
  }
 
- async getEstablishmentByDiscart(id: string): Promise<Establishment[] | undefined> {
-  let discart = await this.establishmentDataBase.getDiscartById(id)
-  let establishments: Establishment[] = []
+ async getEstablishmentByDiscart(name: string): Promise<EstablishmentCard[] | undefined> {
+  let discart = await this.establishmentDataBase.getDiscartByName(name)
+  let establishments: EstablishmentCard[] = []
 
   if (!discart) {
    return undefined
@@ -111,17 +111,18 @@ export class EstablishmentBusiness {
     for (let i = 0; i < estabDiscard.length; i++) {
      let estab = await this.getEstablishmentById(estabDiscard[i].id_establishment)
      if (estab) {
-      establishments.push(estab)
+      let newEstab: EstablishmentCard = {
+       id: estab.id,
+       name: estab.name,
+       state: estab.state,
+       city: estab.city,
+       cep: estab.cep
+      }
+      establishments.push(newEstab)
      }
     }
    }
    return establishments
   }
- }
-
- async getDiscarts() {
-  let res = await this.establishmentDataBase.getDiscart()
-
-  return res
  }
 }

@@ -10,4 +10,3 @@ establishmentRouter.post('/', establishmentController.createEstablishment)
 establishmentRouter.get('/id', establishmentController.getEstablishmentById)
 establishmentRouter.get('/discart', establishmentController.getEstablishmentByDiscart)
 
-discartRouter.get('/', establishmentController.getDiscarts)
